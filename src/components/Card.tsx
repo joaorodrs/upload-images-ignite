@@ -5,8 +5,10 @@ import {
   Image,
   Skeleton,
   SkeletonText,
+  chakra,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import NextImage from 'next/image';
 
 interface Card {
   title: string;
@@ -20,18 +22,24 @@ interface CardProps {
   viewImage: (url: string) => void;
 }
 
+const CardImage = chakra(NextImage, {
+  baseStyle: { maxH: 120, maxW: 120 },
+  shouldForwardProp: (prop: string) =>
+    ['width', 'height', 'src', 'alt', 'onLoad', 'onClick'].includes(prop),
+});
+
 export function Card({ data, viewImage }: CardProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
     <Box key={data.ts} borderRadius="md" bgColor="pGray.800">
       <Skeleton isLoaded={!isLoading}>
-        <Image
+        <CardImage
           src={data.url}
           alt={data.title}
           objectFit="cover"
-          w="max"
-          h={48}
+          width="max"
+          height="192px"
           borderTopRadius="md"
           onClick={() => viewImage(data.url)}
           onLoad={() => setIsLoading(false)}
