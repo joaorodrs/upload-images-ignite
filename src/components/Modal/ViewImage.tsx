@@ -4,22 +4,15 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
-  Image as ChakraImage,
+  Image,
   Link,
-  chakra,
 } from '@chakra-ui/react';
-import NextImage from 'next/image';
 
 interface ModalViewImageProps {
   isOpen: boolean;
   onClose: () => void;
   imgUrl: string;
 }
-
-const Image = chakra(NextImage, {
-  shouldForwardProp: (prop: string) =>
-    ['width', 'height', 'src', 'alt', 'onLoad', 'onClick'].includes(prop),
-});
 
 export function ModalViewImage({
   isOpen,
@@ -31,7 +24,7 @@ export function ModalViewImage({
       <ModalOverlay />
       <ModalContent alignSelf="center" bgColor="pGray.800">
         <ModalBody p={2}>
-          <Image src={imgUrl} width="100%" height="100%" />
+          <Image src={imgUrl} />
         </ModalBody>
         <ModalFooter justifyContent="start">
           <Link href={imgUrl} target="_blank">

@@ -48,8 +48,6 @@ export default function Home(): JSX.Element {
     return data?.pages.flatMap(pageData => pageData.data).flat();
   }, [data]);
 
-  console.log({ formattedData });
-
   if (isLoading) return <Loading />;
 
   if (isError) return <Error />;
